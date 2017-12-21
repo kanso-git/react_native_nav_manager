@@ -1,6 +1,15 @@
 import * as types from './../actions/types';
 
-export default (state = { email: '', password: '', loggedIn: false }, action) => {
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  loggedIn: null,
+  error: null,
+  spinner: false,
+};
+
+export default (state = INITIAL_STATE, action) => {
+  console.log(`recieved action ${action ? JSON.stringify(action, null, 3) : action}`);
   switch (action.type) {
     case types.EMAIL_CHANGE:
       return { ...state, ...action.payload };
@@ -9,10 +18,19 @@ export default (state = { email: '', password: '', loggedIn: false }, action) =>
       return { ...state, ...action.payload };
 
     case types.LOGGED_IN:
-      return { ...state, loggedIn: true };
+      return { ...state, ...action.payload };
 
     case types.LOGGED_OUT:
-      return { ...state, loggedIn: false };
+      return { ...state, ...action.payload };
+
+    case types.ERROR_LOGIN:
+      return { ...state, ...action.payload };
+
+    case types.SPINNER_ON:
+      return { ...state, ...action.payload };
+
+    case types.SPINNER_OFF:
+      return { ...state, ...action.payload };
 
     default:
       return state;

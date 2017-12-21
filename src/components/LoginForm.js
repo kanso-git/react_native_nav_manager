@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Text } from 'react-native';
 import * as actions from './actions';
 import { Card } from './common';
 import CardSection from './common/CardSection';
@@ -16,10 +17,13 @@ class LoginForm extends Component {
     this.props.passwordChange(text);
   }
   onLogin = () => {
-
+    this.props.startLogin(this.props.loginForm);
+  }
+  onLogout = () => {
+    this.props.startLogout();
   }
   render() {
-    const { email, password } = this.props.loginForm;
+    const { email, password, error } = this.props.loginForm;
     return (
       <Card>
         <CardSection>
@@ -41,7 +45,14 @@ class LoginForm extends Component {
           />
         </CardSection>
         <CardSection>
-          <Button onLogin={this.press}>Login</Button>
+          <Button press={this.onLogin}>Login</Button>
+        </CardSection>
+        <CardSection>
+          <Button press={this.onLogout}>Logout</Button>
+        </CardSection>
+
+        <CardSection >
+          <Text style={{ color: 'red', height: 30 }}>{error}</Text>
         </CardSection>
       </Card>
 

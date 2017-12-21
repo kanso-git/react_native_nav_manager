@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
+import thunk from 'redux-thunk';
+
 
 import {
   FIREBASE_API_KEY,
@@ -13,8 +15,10 @@ import {
   FIREBASE_MESSAGING_SENDER_ID,
 } from 'react-native-dotenv';
 
+import * as actions from './components/actions';
 import reducers from './components/reducers';
 import LoginForm from './components/LoginForm';
+import { Spinner } from './components/common';
 
 
 class App extends Component {
@@ -32,11 +36,24 @@ class App extends Component {
     };
     console.log('config', JSON.stringify(config, null, 3));
     firebase.initializeApp(config);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(`logged in user: ${user}`);
+        this.myStore.dispatch(actions.loggedIn());
+      } else {
+        console.log('logged out ....');
+        this.myStore.dispatch(actions.loggedOut());
+      }
+    });
   }
+  myStore = null;
 
   render() {
+    this.myStore = createStore(reducers, applyMiddleware(thunk));
+    console.log('this.myStore.getState()');
+    console.log(this.myStore.getState());
     return (
-      <Provider store={createStore(reducers)} >
+      <Provider store={this.myStore} >
         <View>
           <LoginForm />
         </View>
