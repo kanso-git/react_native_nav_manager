@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import firebase from 'firebase';
@@ -14,13 +14,10 @@ import {
 } from 'react-native-dotenv';
 
 import reducers from './components/reducers';
+import LoginForm from './components/LoginForm';
 
 
 class App extends Component {
-  state={
-    loggedIn: null,
-  };
-
   /* remember that lifecycle methods are methods that are automatically invoked inside
       of our component all you have to do is to define the method
       */
@@ -35,23 +32,13 @@ class App extends Component {
     };
     console.log('config', JSON.stringify(config, null, 3));
     firebase.initializeApp(config);
-    /*
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log(`Login case User is ${user} `);
-        this.setState(() => ({ loggedIn: true }));
-      } else {
-        console.log(`Logout case user :${user} `);
-        this.setState(() => ({ loggedIn: false }));
-      }
-    });*/
   }
 
   render() {
     return (
       <Provider store={createStore(reducers)} >
         <View>
-          <Text> weclome to my app </Text>
+          <LoginForm />
         </View>
       </Provider>
     );

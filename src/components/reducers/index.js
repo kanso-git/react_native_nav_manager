@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import NavReducers from './NavReducers';
+import loginReducers from './LoginReducers';
 
 export default combineReducers({
-  baba: ()=>[]
+  loginForm: loginReducers,
 });
