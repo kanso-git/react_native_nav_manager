@@ -82,12 +82,10 @@ const startLogin = ({ email, password }) =>
     } catch (e) {
       if (e != null) {
         switch (e.code) {
-          case errors.ERROR_WEAK_PASS:
-            return dispatch(errorLogin(e.code));
           case errors.ERROR_USER_NOT_FOUND:
             try {
               await firebase.auth().createUserWithEmailAndPassword(email, password);
-              await firebase.auth().signInWithEmailAndPassword(email, password);
+              // await firebase.auth().signInWithEmailAndPassword(email, password);
               return null;// dispatch(loggedIn());
             } catch (e2) {
               return dispatch(errorLogin(e2 ? e2.code : e2));

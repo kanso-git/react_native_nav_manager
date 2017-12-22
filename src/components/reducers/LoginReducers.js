@@ -18,10 +18,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, ...action.payload };
 
     case types.LOGGED_IN:
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, error: null };
 
     case types.LOGGED_OUT:
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, error: null };
 
     case types.ERROR_LOGIN:
       return { ...state, ...action.payload };

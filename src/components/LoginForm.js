@@ -1,13 +1,10 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types,no-empty */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import * as actions from './actions';
-import { Card } from './common';
-import CardSection from './common/CardSection';
-import Input from './common/Input';
-import Button from './common/Button';
-
+import * as errors from './actions/errors';
+import { Card, Spinner, CardSection, Input, Button } from './common';
 
 class LoginForm extends Component {
   onEmailChange = (text) => {
@@ -22,8 +19,28 @@ class LoginForm extends Component {
   onLogout = () => {
     this.props.startLogout();
   }
+  renderError= () => {
+    const { error } = this.props.loginForm;
+    if (!error) {
+    } else {
+      // todo user errors file to map the error
+      return (
+        <View style={{ height: 30, paddingTop: 5 }}>
+          <Text style={{ color: 'red', fontSize: 18, alignSelf: 'center' }}>{error}</Text>
+        </View>
+      );
+    }
+    return null;
+  }
+  renderBtnOrSpinner = () => {
+    const { spinner } = this.props.loginForm;
+    if (spinner) {
+      return <Spinner />;
+    }
+    return <Button press={this.onLogin}>Login</Button>;
+  }
   render() {
-    const { email, password, error } = this.props.loginForm;
+    const { email, password } = this.props.loginForm;
     return (
       <Card>
         <CardSection>
@@ -44,15 +61,12 @@ class LoginForm extends Component {
             onChangeText={this.onPasswordChange}
           />
         </CardSection>
+        {this.renderError()}
         <CardSection>
-          <Button press={this.onLogin}>Login</Button>
+          { this.renderBtnOrSpinner() }
         </CardSection>
         <CardSection>
           <Button press={this.onLogout}>Logout</Button>
-        </CardSection>
-
-        <CardSection >
-          <Text style={{ color: 'red', height: 30 }}>{error}</Text>
         </CardSection>
       </Card>
 
