@@ -38,7 +38,7 @@ class App extends Component {
     firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(`logged in user: ${user}`);
+        console.log(`logged in user: ${JSON.stringify(user, null, 3)}`);
         this.myStore.dispatch(actions.loggedIn());
       } else {
         console.log('logged out ....');
