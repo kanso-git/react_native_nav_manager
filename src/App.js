@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import thunk from 'redux-thunk';
 
-
 import {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
@@ -17,8 +16,7 @@ import {
 
 import * as actions from './components/actions';
 import reducers from './components/reducers';
-import LoginForm from './components/LoginForm';
-import { Spinner } from './components/common';
+import Router from './Router';
 
 
 class App extends Component {
@@ -54,8 +52,8 @@ class App extends Component {
     console.log(this.myStore.getState());
     return (
       <Provider store={this.myStore} >
-        <View>
-          <LoginForm />
+        <View style={{flex: 1}}>
+          <Router />
         </View>
       </Provider>
     );
