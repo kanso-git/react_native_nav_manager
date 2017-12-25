@@ -14,6 +14,8 @@ import {
   FIREBASE_MESSAGING_SENDER_ID,
 } from 'react-native-dotenv';
 
+import { Actions } from 'react-native-router-flux';
+
 import * as actions from './components/actions';
 import reducers from './components/reducers';
 import Router from './Router';
@@ -38,6 +40,7 @@ class App extends Component {
       if (user) {
         console.log(`logged in user: ${JSON.stringify(user, null, 3)}`);
         this.myStore.dispatch(actions.loggedIn());
+        Actions.employeeList();
       } else {
         console.log('logged out ....');
         this.myStore.dispatch(actions.loggedOut());
@@ -52,7 +55,7 @@ class App extends Component {
     console.log(this.myStore.getState());
     return (
       <Provider store={this.myStore} >
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <Router />
         </View>
       </Provider>
