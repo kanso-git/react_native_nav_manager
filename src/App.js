@@ -40,7 +40,7 @@ class App extends Component {
       if (user) {
         console.log(`logged in user: ${JSON.stringify(user, null, 3)}`);
         this.myStore.dispatch(actions.loggedIn());
-        Actions.employeeList();
+        Actions.main();
       } else {
         console.log('logged out ....');
         this.myStore.dispatch(actions.loggedOut());
