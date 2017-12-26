@@ -12,9 +12,8 @@ class EmployeeList extends Component {
     this.props.fetchEmployeeListFromFirebase();
   }
   onPressItem = (item) => {
-    console.log(item);
     // onPressItem={this.onPressItem}
-    Actions.push('employeeForm',item);
+    Actions.push('employeeEdit', { employeeForm: item });
   };
   renderItem = ({ item }) => (
     <Employee item={item} pressFn={this.onPressItem}/>

@@ -14,6 +14,8 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
     case types.SHIFT_SELECT:
       return { ...state, ...action.payload };
+    case types.FILL_IN_FORM_FOR_UPDATE:
+      return { ...state, ...action.payload.employeeForm };
     case types.RESET_EMPLOYEE_FROM:
       return { ...initialState };
     default:

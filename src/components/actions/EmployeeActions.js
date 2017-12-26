@@ -79,6 +79,37 @@ const fetchEmployeeListFromFirebase = () =>
     }
   };
 
+const saveChangesEmployee = ({
+  displayName, phoneNumber, shift, key,
+}) =>
+  async (disptach) => {
+    const { currentUser } = firebase.auth();
+    try {
+      await firebase.database().ref(`/users/${currentUser.uid}/employees/${key}`)
+        .set({ displayName, phoneNumber, shift });
+      disptach(resetEmployeeForm()); // clear form after add
+      Actions.pop();
+      // Actions.reset('main', {});
+    } catch (e) {
+      console.log(`w've got an error while editing employee with uid:${key}
+        error is :${e}`);
+    }
+  };
+const deleteEmployee = ({ key }) =>
+  async (disptach) => {
+    const { currentUser } = firebase.auth();
+    try {
+      await firebase.database().ref(`/users/${currentUser.uid}/employees/${key}`)
+        .remove();
+      disptach(resetEmployeeForm()); // clear form after add
+      Actions.pop();
+      // Actions.reset('main', {});
+    } catch (e) {
+      console.log(`w've got an error while deleting employee with uid:${key}
+          error is :${e}`);
+    }
+  };
+
 export {
   displayNameChange,
   phoneNumberChange,
@@ -87,4 +118,7 @@ export {
   fillInEmployeeForm,
   fetchEmployeeListFromFirebase,
   setEmployeeList,
+  resetEmployeeForm,
+  saveChangesEmployee,
+  deleteEmployee,
 };
