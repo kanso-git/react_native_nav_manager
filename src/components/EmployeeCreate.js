@@ -19,7 +19,13 @@ class EmployeeCreate extends Component {
   componentWillMount() {
     if (this.props.employeeForm.shift.trim().length === 0) {
       console.log('set the shift........');
-      this.props.shiftSelectChange('monday');
+      const employee = this.props.navigation.state.params;
+      if(employee){
+        console.log(employee)
+        this.props.fillInEmployeeForm(employee)
+      }else{
+        this.props.shiftSelectChange('monday');
+      }
     }
   }
   onDisplayNameChange = (displayName) => {

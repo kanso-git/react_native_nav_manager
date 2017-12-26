@@ -11,7 +11,11 @@ const SPINNER_OFF = 'spinner_off';
 const DISPLAY_NAME_CHANGE = 'display_name_change';
 const PHONE_NUMBER_CHANGE = 'phone_number_change';
 const SHIFT_SELECT = 'shift select';
-const EMPLOYEE_CREATE = 'employee_create';
+const RESET_EMPLOYEE_FROM = 'reset_employee_form';
+const FILL_IN_FORM_FOR_UPDATE = 'fill_in_form_for_update';
+
+// employee list
+const SET_EMPLOYEE_LIST = 'set_employee_list';
 
 export {
   EMAIL_CHANGE,
@@ -23,6 +27,8 @@ export {
   SPINNER_OFF,
   DISPLAY_NAME_CHANGE,
   PHONE_NUMBER_CHANGE,
+  FILL_IN_FORM_FOR_UPDATE,
   SHIFT_SELECT,
-  EMPLOYEE_CREATE,
+  RESET_EMPLOYEE_FROM,
+  SET_EMPLOYEE_LIST,
 };

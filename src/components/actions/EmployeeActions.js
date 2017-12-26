@@ -29,20 +29,53 @@ const shiftSelectChange = shift => (
     },
   }
 );
-const employeeCreate = () => ({ type: types.EMPLOYEE_CREATE });
 
+const fillInEmployeeForm = employee => ({
+  type: types.FILL_IN_FORM_FOR_UPDATE,
+  payload: {
+    employeeForm: employee,
+  },
+});
+// action creator to clear the form
+const resetEmployeeForm = () => ({ type: types.RESET_EMPLOYEE_FROM });
+
+// 1 - async action save the employe in firebase db
+// 2 - reset the employee form
+// 3 - go back to the employee list
 const saveNewEmployee = ({ displayName, phoneNumber, shift }) =>
   async (disptach) => {
     const { currentUser } = firebase.auth();
     try {
       await firebase.database().ref(`/users/${currentUser.uid}/employees`)
         .push({ displayName, phoneNumber, shift });
-      // Actions.reset('main', {});
-      disptach(employeeCreate());
+      disptach(resetEmployeeForm()); // clear form after add
       Actions.pop();
+      // Actions.reset('main', {});
     } catch (e) {
       console.log(`w've got an error while saving new employee 
         error is :${e}`);
+    }
+  };
+
+// actions for employee list
+const setEmployeeList = employeeList => ({
+  type: types.SET_EMPLOYEE_LIST,
+  payload: {
+    employeeList,
+  },
+
+});
+const fetchEmployeeListFromFirebase = () =>
+  (dispatch) => {
+    const { currentUser } = firebase.auth();
+    try {
+      firebase.database().ref(`/users/${currentUser.uid}/employees`)
+        .on('value', (snapshot) => {
+          dispatch(setEmployeeList(snapshot.val()));
+        });
+    } catch (e) {
+      console.log(`error in fetchEmployeeListFromFirebase 
+    ${e}`);
     }
   };
 
@@ -51,4 +84,7 @@ export {
   phoneNumberChange,
   shiftSelectChange,
   saveNewEmployee,
+  fillInEmployeeForm,
+  fetchEmployeeListFromFirebase,
+  setEmployeeList,
 };

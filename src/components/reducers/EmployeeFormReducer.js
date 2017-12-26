@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
     case types.SHIFT_SELECT:
       return { ...state, ...action.payload };
-    case types.EMPLOYEE_CREATE:
+    case types.RESET_EMPLOYEE_FROM:
       return { ...initialState };
     default:
       return state;
