@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
-import * as actions from './actions';
+import { authActions } from './actions';
 import * as errors from './actions/errors';
 import { Card, Spinner, CardSection, Input, Button } from './common';
 
@@ -14,13 +14,13 @@ class LoginForm extends Component {
     this.props.passwordChange(text);
   }
   onLogin = () => {
-    this.props.startLogin(this.props.loginForm);
+    this.props.startLogin(this.props.auth);
   }
   onLogout = () => {
     this.props.startLogout();
   }
   renderError= () => {
-    const { error } = this.props.loginForm;
+    const { error } = this.props.auth;
     if (!error) {
     } else {
       // todo user errors file to map the error
@@ -33,21 +33,21 @@ class LoginForm extends Component {
     return null;
   }
   renderBtnOrSpinner = () => {
-    const { spinner } = this.props.loginForm;
+    const { spinner } = this.props.auth;
     if (spinner) {
       return <Spinner />;
     }
     return <Button press={this.onLogin}>Login</Button>;
   }
   render() {
-    const { email, password } = this.props.loginForm;
+    const { email, password } = this.props.auth;
     return (
       <Card>
         <CardSection>
           <Input
             autoFocus
             label="Email"
-            placholder="email@ggmail.com"
+            placeholder="email@ggmail.com"
             value={email}
             onChangeText={this.onEmailChange}
           />
@@ -56,7 +56,7 @@ class LoginForm extends Component {
           <Input
             secureTextEntry
             label="Password"
-            placholder="password"
+            placeholder="password"
             value={password}
             onChangeText={this.onPasswordChange}
           />
@@ -73,9 +73,6 @@ class LoginForm extends Component {
     );
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
-  console.log(state);
-  return { loginForm: state.loginForm };
-};
-export default connect(mapStateToProps, actions)(LoginForm);
+const mapStateToProps = state => ({ auth: state.auth });
+
+export default connect(mapStateToProps, authActions)(LoginForm);

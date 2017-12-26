@@ -16,7 +16,7 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
-import * as actions from './components/actions';
+import { authActions } from './components/actions';
 import reducers from './components/reducers';
 import Router from './Router';
 
@@ -39,11 +39,11 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(`logged in user: ${JSON.stringify(user, null, 3)}`);
-        this.myStore.dispatch(actions.loggedIn());
+        this.myStore.dispatch(authActions.loggedIn(user));
         Actions.main();
       } else {
         console.log('logged out ....');
-        this.myStore.dispatch(actions.loggedOut());
+        this.myStore.dispatch(authActions.loggedOut());
       }
     });
   }

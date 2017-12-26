@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 const CardSection = props => (
-  <View style={styles.containerStyle}>
+  <View style={[styles.containerStyle, props.style]}>
     { props.children }
   </View>
 );

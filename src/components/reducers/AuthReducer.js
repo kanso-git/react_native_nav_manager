@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   loggedIn: null,
   error: null,
   spinner: false,
+  user: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
