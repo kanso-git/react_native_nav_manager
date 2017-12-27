@@ -45,20 +45,23 @@ class EmployeeEdit extends Component {
           <Button
             press={this.onSaveChangesEmployee}
           >
-          Save Changes
-          </Button>
-          <Button
-            press={this.onDeleteEmployee}
-          >
-          Delete Employee
+            Save Changes
           </Button>
         </CardSection>
         <CardSection>
           <Button
             press={this.onTextEmployee}
           >
-        Text
+            Text
           </Button>
+        </CardSection>
+        <CardSection>
+          <Button
+            press={this.onDeleteEmployee}
+          >
+            Delete Employee
+          </Button>
+
         </CardSection>
       </Card>
     );
