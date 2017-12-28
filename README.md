@@ -7,3 +7,7 @@ it's a small app that uses the following modules:
 4- redux-thunk
 5-  firebase
 
+# todo 
+1- the logout
+2- use a modal instaed of the alert and create a generic modal 
+3- use the spinner each time we perform a synchronus action 
