@@ -2,10 +2,13 @@
 it's a small app that uses the following modules:
 
   react-native-router-flux
-  
-  redux 
-  react-redux 
+
+  redux
+
+  react-redux
+
   redux-thunk
+  
   firebase
   ...
 
