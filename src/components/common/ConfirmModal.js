@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types,no-empty */
 import React from 'react';
 import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 

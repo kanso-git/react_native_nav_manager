@@ -98,7 +98,7 @@ class EmployeeEdit extends Component {
           visible={this.state.showModal}
           onConfirm={this.onConfirm}
           onCancel={this.onCancel}
-        ><Text>Are you sure ?</Text>
+        ><Text>Delete {this.props.employeeForm.displayName} ?</Text>
         </ConfirmModal>
 
       </Card>
