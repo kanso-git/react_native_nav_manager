@@ -1,17 +1,18 @@
 # react_native_nav_manager
 it's a small app that uses the following modules:
 
- # react-native-router-flux
- # redux 
- # react-redux 
- # redux-thunk
- # firebase
+  react-native-router-flux
+  redux 
+  react-redux 
+  redux-thunk
+  firebase
+  ...
 
 ## todos
 # the logout implementation 
   use the spinner each time we perform an asynchronus action 
   deploy on real devise
-  
+
 ## added
 # model implementation 
   I have added a new common component - confirmModal for this purpose 
