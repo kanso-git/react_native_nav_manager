@@ -26,3 +26,5 @@ it's a small app that uses the following modules:
 # using babel plugins 
   By  using transform-class-properties and transform-object-rest-spread
   you can write arrow functions instead the es6 method , myself i found this more natural, in the same context the rest-spread allows us to spread the properties of an object e.g {...obj}.
+# navigation implementation 
+the version of react-native-router-flux used in this sample is : "4.0.0-beta.24".
